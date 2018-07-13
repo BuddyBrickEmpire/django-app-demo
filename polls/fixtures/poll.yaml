@@ -1,0 +1,70 @@
+- model: polls.Question
+  pk: 1
+  fields:
+    question: What is your favourite beer type?
+
+- model: polls.Choice
+  fields:
+    question_id: 1
+    label: Lager
+
+- model: polls.Choice
+  fields:
+    question_id: 1
+    label: Pale Ale
+
+- model: polls.Choice
+  fields:
+    question_id: 1
+    label: IPA
+
+- model: polls.Choice
+  fields:
+    question_id: 1
+    label: Porter or Stout
+
+- model: polls.Choice
+  fields:
+    question_id: 1
+    label: Belgian abbey beer
+
+- model: polls.Choice
+  fields:
+    question_id: 1
+    label: Sour beer
+
+- model: polls.Choice
+  fields:
+    question_id: 1
+    label: All of the above
+
+- model: polls.Question
+  pk: 2
+  fields:
+    question: What is your favourite Kington brewery?
+
+- model: polls.Choice
+  fields:
+    question_id: 2
+    label: Kingston Brew Company (KBC)
+
+- model: polls.Choice
+  fields:
+    question_id: 2
+    label: Stone City
+
+- model: polls.Choice
+  fields:
+    question_id: 2
+    label: Riverhead
+
+- model: polls.Choice
+  fields:
+    question_id: 2
+    label: Spearhead
+
+- model: polls.Choice
+  fields:
+    question_id: 2
+    label: Erwin's Homebrew
+

@@ -1,0 +1,21 @@
+{% load static from staticfiles %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }}</title>
+    {% bootstrap_css %}
+</head>
+<body>
+    <div class="container">
+    {% block content %}
+        hello
+    {% endblock %}
+    </div>
+
+    {% bootstrap_javascript jquery='full' %}
+</body>
+</html>
+
