@@ -1,0 +1,222 @@
+{
+    "kitchen": {
+        "name": "kitchen",
+        "locations": [
+            {
+                "goal": 0,
+                "id": "K01",
+                "label": "In the refrigerator"
+            },
+            {
+                "goal": 0,
+                "id": "K02",
+                "label": "In the dishwasher"
+            },
+            {
+                "goal": 0,
+                "id": "K03",
+                "label": "Inside the coffee maker"
+            },
+            {
+                "goal": 0,
+                "id": "K04",
+                "label": "In a cabinet with mugs and glasses"
+            },
+            {
+                "goal": 0,
+                "id": "K05",
+                "label": "Behind the freezer drawer"
+            },
+            {
+                "goal": 0,
+                "id": "K06",
+                "label": "In the teapot"
+            },
+            {
+                "goal": 0,
+                "id": "K07",
+                "label": "Inside a case of beer"
+            },
+            {
+                "goal": 0,
+                "id": "K08",
+                "label": "In the garbage can"
+            },
+            {
+                "goal": 0,
+                "id": "K09",
+                "label": "In a drawer with cutlery"
+            },
+            {
+                "goal": 0,
+                "id": "K10",
+                "label": "Inside a cereal box"
+            }
+        ]
+    },
+    "living-room": {
+        "name": "Living Room",
+        "locations": [
+            {
+                "goal": 0,
+                "id": "L01",
+                "label": "Inside a couch cushion"
+            },
+            {
+                "goal": 0,
+                "id": "L02",
+                "label": "Behind a clock"
+            },
+            {
+                "goal": 0,
+                "id": "L03",
+                "label": "In a decorative plant"
+            },
+            {
+                "goal": 0,
+                "id": "L04",
+                "label": "Behind the furniture"
+            },
+            {
+                "goal": 0,
+                "id": "L05",
+                "label": "Over a picture frame"
+            },
+            {
+                "goal": 0,
+                "id": "L06",
+                "label": "Under an area rug"
+            },
+            {
+                "goal": 0,
+                "id": "L07",
+                "label": "Under the couch"
+            },
+            {
+                "goal": 0,
+                "id": "L08",
+                "label": "Inside the BB Rulebook"
+            },
+            {
+                "goal": 0,
+                "id": "L09",
+                "label": "In a nominee chair"
+            },
+            {
+                "goal": 0,
+                "id": "L10",
+                "label": "Behind the television"
+            }
+        ]
+    },
+    "front-bedroom": {
+        "name": "Front Bedroom",
+        "locations": [
+            {
+                "goal": 0,
+                "id": "F01",
+                "label": "Inside someones makeup bag"
+            },
+            {
+                "goal": 0,
+                "id": "F02",
+                "label": "Behind a mirror"
+            },
+            {
+                "goal": 0,
+                "id": "F03",
+                "label": "Inside someones dufflebag"
+            },
+            {
+                "goal": 0,
+                "id": "F04",
+                "label": "Over a door frame"
+            },
+            {
+                "goal": 0,
+                "id": "F05",
+                "label": "A random hoodie pocket"
+            },
+            {
+                "goal": 0,
+                "id": "F06",
+                "label": "Behind the wall tapestry"
+            },
+            {
+                "goal": 0,
+                "id": "F07",
+                "label": "Under a mattress"
+            },
+            {
+                "goal": 0,
+                "id": "F08",
+                "label": "Under a half-full coffee mug"
+            },
+            {
+                "goal": 0,
+                "id": "F09",
+                "label": "In someones shoe"
+            },
+            {
+                "goal": 0,
+                "id": "F10",
+                "label": "In a dresser drawer"
+            }
+        ]
+    },
+    "back-bedroom": {
+        "name": "Back Bedroom",
+        "locations": [
+            {
+                "goal": 0,
+                "id": "B01",
+                "label": "Under the bed"
+            },
+            {
+                "goal": 0,
+                "id": "B02",
+                "label": "In some dirty undies"
+            },
+            {
+                "goal": 0,
+                "id": "B03",
+                "label": "Under the house bible"
+            },
+            {
+                "goal": 0,
+                "id": "B04",
+                "label": "Behind some wall art"
+            },
+            {
+                "goal": 0,
+                "id": "B05",
+                "label": "Inside a balled up blanket"
+            },
+            {
+                "goal": 0,
+                "id": "B06",
+                "label": "In a carton of cigarettes"
+            },
+            {
+                "goal": 0,
+                "id": "B07",
+                "label": "In plain sight"
+            },
+            {
+                "goal": 0,
+                "id": "B08",
+                "label": "In a shared closet"
+            },
+            {
+                "goal": 0,
+                "id": "B09",
+                "label": "Inside another dufflebag"
+            },
+            {
+                "goal": 0,
+                "id": "B10",
+                "label": "Behind the door"
+            }
+        ]
+    }
+}

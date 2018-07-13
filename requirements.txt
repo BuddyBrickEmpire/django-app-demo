@@ -1,0 +1,7 @@
+django
+psycopg2-binary
+django-bootstrap4
+gunicorn
+pyyaml
+splinter
+django-dotenv
