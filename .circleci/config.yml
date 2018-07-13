@@ -1,0 +1,146 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2
+jobs:
+  test-job:
+    docker:
+      # specify the version you desire here
+      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
+      - image: circleci/python:3.6.5-jessie-node-browsers
+      - image: circleci/postgres:10.3
+        environment:
+          CIRCLE_JOB: test
+          POSTGRES_USER: circleci
+          POSTGRES_DB: demo
+
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "requirements.txt" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
+        
+      # run tests!
+      # this example uses Django's built-in test-runner
+      # other common Python testing frameworks include pytest and nose
+      # https://pytest.org
+      # https://nose.readthedocs.io
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            python manage.py test
+
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
+
+  deploy-job:
+    docker:
+      - image: circleci/python:3.6.5
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run:
+          name: prepare
+          command: |
+            echo $AUTH | base64 --decode > ${HOME}/gcp-key.json
+
+            echo 'DB_USER='${DB_USER} > .env
+            echo 'DB_PASSWORD='${DB_PASSWORD} >> .env
+            echo 'DB_NAME='${DB_NAME} >> .env
+            echo 'DB_HOST=/cloudsql/'${DB} >> .env
+
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+
+      - run:
+          name: migrate
+          command: |
+            wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+            chmod +x cloud_sql_proxy
+            sudo mkdir /cloudsql
+            sudo chown circleci.circleci /cloudsql
+            . venv/bin/activate
+            ./cloud_sql_proxy -dir=/cloudsql -instances=${DB} -credential_file=${HOME}/gcp-key.json &
+            sleep 2
+            python manage.py migrate
+            python manage.py loaddata poll
+            pkill cloud_sql_proxy
+            rm cloud_sql_proxy
+            deactivate
+
+      - run:
+          name: sdk
+          command: |
+            wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-187.0.0-linux-x86.tar.gz -O /tmp/google-cloud-sdk-187.0.0-linux-x86.tar.gz
+            tar zxvf /tmp/google-cloud-sdk-187.0.0-linux-x86.tar.gz -C /tmp
+            rm /tmp/google-cloud-sdk-187.0.0-linux-x86.tar.gz
+            /tmp/google-cloud-sdk/install.sh --usage-reporting=false --path-update=false --bash-completion=false
+
+      - run:
+          name: deploy
+          command: |
+            source /tmp/google-cloud-sdk/path.bash.inc
+            gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
+            gcloud --quiet config set project ${PROJECT_ID}
+            gcloud -q app deploy app.yaml --bucket=gs://${BUCKET} --verbosity=info
+
+workflows:
+  version: 2
+  feature-workflow:
+    jobs:
+      - test-job:
+          filters:
+            branches:
+              ignore:
+                - master
+                - develop
+  deploy-workflow:
+    jobs:
+      - test-job:
+          filters:
+            branches:
+              only:
+                - develop
+                - master
+      - deploy-job:
+          requires:
+            - test-job
+          filters:
+            branches:
+              only:
+                - develop
+                - master
+
+
+
